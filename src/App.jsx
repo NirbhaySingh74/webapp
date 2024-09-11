@@ -3,7 +3,9 @@ import { Amplify } from "aws-amplify";
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Use Routes instead of Switch
 import ItemList from "./components/ItemList";
+import ItemDetail from "./components/ItemDetail";
 
 Amplify.configure(awsExports);
 
@@ -24,9 +26,14 @@ function App() {
               </button>
             </header>
 
-            <main className="p-6">
-              <ItemList />
-            </main>
+            <Router>
+              <Routes>
+                {/* Route for the items list */}
+                <Route path="/" element={<ItemList />} />
+                {/* Route for the item detail view */}
+                <Route path="/item/:id" element={<ItemDetail />} />
+              </Routes>
+            </Router>
           </>
         )}
       </Authenticator>
