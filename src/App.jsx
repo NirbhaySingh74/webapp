@@ -27,7 +27,7 @@ function App() {
           <main>
             <header className="App-header">
               {/* Quiz Component */}
-              {/* <MainComponent /> */}
+              <h1>working</h1>
               {/* Sign Out Button */}
               <button
                 onClick={signOut}
