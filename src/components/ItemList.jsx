@@ -9,9 +9,7 @@ const ItemList = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://amplify-webapp-dev-7e83a-deployment.s3.ap-south-1.amazonaws.com/items.json"
-      )
+      .get("http://127.0.0.1:5000/items")
       .then((response) => {
         setItems(response.data);
       })

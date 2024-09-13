@@ -2,35 +2,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ShimmerDetail from "./ShimmerDetail";
-
 const ItemDetail = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(
-        "https://amplify-webapp-dev-7e83a-deployment.s3.ap-south-1.amazonaws.com/items.json"
-      )
+      .get(`http://127.0.0.1:5000/items/${id}`)
       .then((response) => {
-        const items = response.data;
-        const selectedItem = items.find((item) => item.id === parseInt(id));
-        setItem(selectedItem);
-        setLoading(false);
+        setItem(response.data); // Set the item details in state
       })
       .catch((error) => {
-        console.error("Error fetching the items:", error);
-        setLoading(false);
+        console.error("Error fetching the item:", error);
       });
   }, [id]);
 
-  if (loading) {
-    return <ShimmerDetail />;
-  }
-
   if (!item) {
-    return <div>Item not found</div>;
+    return <ShimmerDetail />; // Show shimmer effect while loading
   }
 
   return (
